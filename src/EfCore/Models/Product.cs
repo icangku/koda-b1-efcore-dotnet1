@@ -11,7 +11,10 @@ public class Product(string code, string name, decimal price, int stock, string 
   public void UpdateDetail(string name, decimal price, int stock, string category)
   {
     var validated = new Product(Code, name, price, stock, category);
+    
     Name = validated.Name;
-    // Price = 
+    Price = validated.Price;
+    Stock = validated.Stock;
+    Category = validated.Category;
   }
 }

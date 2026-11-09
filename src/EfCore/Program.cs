@@ -1,4 +1,6 @@
 using EfCore.Data;
+using EfCore.Repositories;
+using EfCore.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddScoped<IProductRepository, EfProductRepository>();
 
+// Business/Application Service
+builder.Services.AddScoped<
+    IProductService,
+    ProductService>();
 var connectionString = builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("ConnectionString : Belum di configurasi");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
